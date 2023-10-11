@@ -4,18 +4,51 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  graphql:
-    specifier: ^16.8.1
-    version: 16.8.1
+importers:
 
-devDependencies:
-  '@types/node':
-    specifier: ^20.8.3
-    version: 20.8.3
-  nodemon:
-    specifier: ^3.0.1
-    version: 3.0.1
+  .:
+    dependencies:
+      graphql:
+        specifier: ^16.8.1
+        version: 16.8.1
+    devDependencies:
+      '@types/node':
+        specifier: ^20.8.3
+        version: 20.8.3
+      nodemon:
+        specifier: ^3.0.1
+        version: 3.0.1
+
+  examples/countries:
+    dependencies:
+      graphql-ts:
+        specifier: workspace:*
+        version: link:../../packages/graphql-ts
+      test:
+        specifier: workspace:*
+        version: link:../../packages/test
+    devDependencies:
+      '@types/node':
+        specifier: ^20.8.3
+        version: 20.8.3
+      nodemon:
+        specifier: ^3.0.1
+        version: 3.0.1
+
+  packages/graphql-ts:
+    dependencies:
+      graphql:
+        specifier: ^16.8.1
+        version: 16.8.1
+    devDependencies:
+      '@types/node':
+        specifier: ^20.8.3
+        version: 20.8.3
+      nodemon:
+        specifier: ^3.0.1
+        version: 3.0.1
+
+  packages/test: {}
 
 packages:
 
