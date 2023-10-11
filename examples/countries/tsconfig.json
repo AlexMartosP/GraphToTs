@@ -7,7 +7,5 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "dist"
-  },
-  "exclude": ["./example.ts", "./generated.ts"],
-  "include": ["src/index.ts", "src/internals/functions.ts"]
+  }
 }
