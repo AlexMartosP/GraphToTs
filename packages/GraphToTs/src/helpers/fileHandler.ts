@@ -16,21 +16,23 @@ async function fileHandler(filesPrint: {
   loading.start();
 
   try {
-    await mkdir("./graphql-ts");
+    await mkdir("./graphtots");
   } catch (error: any) {
     if (error.code === "EEXIST") {
       willOverwrite = true;
     }
   }
 
-  await writeFile("./graphql-ts/types.ts", filesPrint.typesPrint);
-  await writeFile("./graphql-ts/index.ts", filesPrint.indexPrint);
+  await writeFile("./graphtots/types.ts", filesPrint.typesPrint);
+  await writeFile("./graphtots/index.ts", filesPrint.indexPrint);
 
   loading.stop();
   if (willOverwrite) {
     console.log(green(icons.check) + " Overwrote files");
   } else {
-    console.log(green(icons.check) + " Generated folder and files");
+    console.log(
+      green(icons.check) + " Generated folder and files in './graphtots'"
+    );
   }
 }
 

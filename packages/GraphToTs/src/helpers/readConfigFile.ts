@@ -11,7 +11,7 @@ async function readConfigFile() {
   try {
     loading.start();
 
-    const configFile = await readFile("./graphql-ts.json", "utf-8");
+    const configFile = await readFile("./graphtots.json", "utf-8");
     const config = JSON.parse(configFile);
 
     loading.stop();
@@ -20,7 +20,7 @@ async function readConfigFile() {
     return config;
   } catch (error) {
     loading.stop();
-    console.log(red(icons.error) + " Could not find graphql-ts.json file");
+    console.log(red(icons.error) + " Could not find graphtots.json file");
     process.exit(1);
   }
 }
