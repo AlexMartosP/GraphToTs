@@ -20,6 +20,10 @@ function generateSchemaTree(
   const queryType = getQueryFromSchema(types, queryName);
   const inputObjectsTypes = getInputObjectsFromSchema(types);
 
+  if (!queryType) {
+    throw new Error("No Query type found!");
+  }
+
   // Generate sub-trees of types
   const scalars = generateScalars(scalarTypes);
   const inputObjects = generateInputObjects(inputObjectsTypes);
