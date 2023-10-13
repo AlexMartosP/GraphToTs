@@ -16,7 +16,6 @@
     "nodemon": "^3.0.1"
   },
   "dependencies": {
-    "graphql-ts": "workspace:*",
-    "test": "workspace:*"
+    "graphql-ts": "workspace:*"
   }
 }

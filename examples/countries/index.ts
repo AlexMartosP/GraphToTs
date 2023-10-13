@@ -1,6 +1,5 @@
-// import { query } from "./graphql-ts";
-import { makeQuery } from "./graphql-ts/generated";
-const query = makeQuery("https://countries.trevorblades.com/");
+import { query } from "./graphql-ts/generated";
+
 async function test() {
   console.log("in test");
   const allResponse = await query({
@@ -30,6 +29,6 @@ async function test() {
     },
   });
 
-  console.log(allResponse.countries[0].capital);
+  console.log(allResponse);
 }
 test();

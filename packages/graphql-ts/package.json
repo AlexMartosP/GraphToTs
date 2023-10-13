@@ -2,9 +2,9 @@
   "name": "graphql-ts",
   "version": "1.0.0",
   "description": "",
-  "bin": "dist/index.js",
+  "bin": "dist/bin.js",
   "scripts": {
-    "dev": "nodemon ./index.ts",
+    "dev": "nodemon ./src/index.ts",
     "build": "tsc",
     "start": "node ./dist/index.js"
   },
@@ -16,6 +16,8 @@
     "nodemon": "^3.0.1"
   },
   "dependencies": {
-    "graphql": "^16.8.1"
+    "chalk": "^5.3.0",
+    "graphql": "^16.8.1",
+    "prettier": "^3.0.3"
   }
 }
