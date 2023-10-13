@@ -1,6 +1,14 @@
+import icons from "../cli/icons";
+import Loading from "../cli/loading";
+import { green, red } from "../cli/textColors";
 import { IntrospectionResponse } from "../types";
 
 async function fetchIntrospection(endpoint: string) {
+  const loading = new Loading({
+    label: "Fetching schema...",
+  });
+
+  loading.start();
   const res = await fetch(endpoint, {
     method: "POST",
     headers: {
@@ -87,9 +95,15 @@ async function fetchIntrospection(endpoint: string) {
   });
 
   if (!res.ok) {
-    throw new Error("Could not fetch schema");
+    loading.stop();
+    console.log(red(icons.error) + " Could not fetch schema");
+    process.exit(1);
   }
+
   const data: IntrospectionResponse = await res.json();
+
+  loading.stop();
+  console.log(green(icons.check) + " Fetched schema successfully");
 
   return data;
 }

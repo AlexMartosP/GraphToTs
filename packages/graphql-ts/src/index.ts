@@ -1,18 +1,16 @@
-#!/usr/bin/env node
-
-import { mkdir, readFile, writeFile } from "fs/promises";
+import { mkdir, writeFile } from "fs/promises";
 import fetchIntrospection from "./helpers/fetchIntrospection";
 
-import printIndexFile from "./filePrinters/printIndexFile";
-import printTypesFile from "./filePrinters/printTypesFile";
+import printFiles from "./filePrinters/printFiles";
 import generateSchemaTree from "./generators/generateSchemaTree";
-import printParams from "./printers/printParams";
-import printSchemaTree from "./printers/printSchemaTree";
+import readConfigFile from "./helpers/readConfigFile";
+import fileHandler from "./helpers/fileHandler";
 
 async function run() {
-  // Read endpoint from config file
-  const configFile = await readFile("./graphql-ts.json", "utf-8");
-  const config = JSON.parse(configFile);
+  console.log("\nGenerating Typescript types based on GraphQL schema");
+
+  // Read config file
+  const config = await readConfigFile();
 
   // Fetch schema
   const data = await fetchIntrospection(config.schema);
@@ -20,25 +18,9 @@ async function run() {
   // Generate internal schema tree
   const schemaTree = generateSchemaTree(data.data.__schema.types);
 
-  // Printed schema tree
-  const treePrint = printSchemaTree(schemaTree);
-  // Printed params type
-  const paramsPrint = printParams(schemaTree.query);
+  const filesPrint = await printFiles(schemaTree, config);
 
-  // Print files
-  const typesPrint = await printTypesFile({
-    params: paramsPrint,
-    inputObjects: treePrint.inputObjects,
-    internalObjects: treePrint.objects.internal,
-    originalObjects: treePrint.objects.original,
-    query: treePrint.query,
-    scalars: treePrint.scalars,
-  });
-  const indexPrint = await printIndexFile(config.schema);
-
-  await mkdir("./graphql-ts");
-  await writeFile("./graphql-ts/types.ts", typesPrint);
-  await writeFile("./graphql-ts/index.ts", indexPrint);
+  await fileHandler(filesPrint);
 }
 
 export default run;

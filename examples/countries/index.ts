@@ -1,4 +1,4 @@
-import { query } from "./graphql-ts/generated";
+import { query } from "./graphql-ts";
 
 async function test() {
   console.log("in test");
@@ -29,6 +29,6 @@ async function test() {
     },
   });
 
-  console.log(allResponse);
+  console.log(allResponse.continents);
 }
 test();
