@@ -9,6 +9,7 @@ function generateObjects(objectTypes: IntrospectionTypeArray): ObjectsTree {
     const obj = objectTypes[i];
     const fields: Field[] = [];
 
+    console.log(obj);
     for (let j = 0; j < obj.fields.length; j++) {
       const field = obj.fields[j];
 

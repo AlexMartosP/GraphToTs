@@ -1,5 +1,6 @@
 import { mkdir, writeFile } from "fs/promises";
 import fetchIntrospection from "./helpers/fetchIntrospection";
+import getQueryname from "./helpers/getQueryName";
 
 import printFiles from "./filePrinters/printFiles";
 import generateSchemaTree from "./generators/generateSchemaTree";
@@ -15,8 +16,11 @@ async function run() {
   // Fetch schema
   const data = await fetchIntrospection(config.schema);
 
+  // Get Query name
+  const queryName = getQueryname(data.data.__schema.queryType);
+
   // Generate internal schema tree
-  const schemaTree = generateSchemaTree(data.data.__schema.types);
+  const schemaTree = generateSchemaTree(data.data.__schema.types, queryName);
 
   const filesPrint = await printFiles(schemaTree, config);
 

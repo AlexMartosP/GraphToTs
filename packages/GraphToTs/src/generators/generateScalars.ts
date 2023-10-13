@@ -2,7 +2,13 @@ import { typeNames } from "../constants";
 import { IntrospectionTypeArray, ScalarTree } from "../types";
 
 function generateScalars(scalarType: IntrospectionTypeArray): ScalarTree {
-  const scalars: ScalarTree = {};
+  const scalars: ScalarTree = {
+    any: {
+      key: "Any",
+      tsType: "any",
+      usageString: `${typeNames.SCALARS}["Any"]`,
+    },
+  };
 
   for (let i = 0; i < scalarType.length; i++) {
     const scalar = scalarType[i];

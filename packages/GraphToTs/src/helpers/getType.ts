@@ -10,10 +10,18 @@ function getType(type: IntrospectionFieldType): FieldType {
     isOptional: true,
   };
 
+  console.log(currentType);
   while (true) {
     if (currentType.kind === schemaTypeConstants.NON_NULL) {
-      currentType = currentType.ofType;
       data.isOptional = false;
+      if (currentType.ofType) {
+        currentType = currentType.ofType;
+      } else {
+        data.listof = FieldTypes.Scalar;
+        data.typeValue = "Any";
+
+        return data;
+      }
     } else if (currentType.kind === schemaTypeConstants.SCALAR) {
       data.typeValue = currentType.name;
 
@@ -25,8 +33,14 @@ function getType(type: IntrospectionFieldType): FieldType {
 
       return data;
     } else if (currentType.kind === schemaTypeConstants.LIST) {
-      currentType = currentType.ofType;
       data.type = FieldTypes.List;
+
+      if (currentType.ofType) {
+        currentType = currentType.ofType;
+      } else {
+        data.listof = FieldTypes.Scalar;
+        data.typeValue = "Any";
+      }
     } else if (currentType.kind === schemaTypeConstants.OBJECT) {
       data.typeValue = currentType.name;
 
@@ -40,6 +54,11 @@ function getType(type: IntrospectionFieldType): FieldType {
     } else if (currentType.kind === schemaTypeConstants.INPUT_OBJECT) {
       data.type = FieldTypes.Input_object;
       data.typeValue = currentType.name;
+
+      return data;
+    } else if (currentType.kind === schemaTypeConstants.ENUM) {
+      data.type = FieldTypes.Scalar;
+      data.typeValue = "Any";
 
       return data;
     } else {

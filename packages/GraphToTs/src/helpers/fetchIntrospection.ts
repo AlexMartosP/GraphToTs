@@ -12,7 +12,7 @@ async function fetchIntrospection(endpoint: string) {
   const res = await fetch(endpoint, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json;",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       query: `
@@ -97,6 +97,9 @@ async function fetchIntrospection(endpoint: string) {
   if (!res.ok) {
     loading.stop();
     console.log(red(icons.error) + " Could not fetch schema");
+    const e = await res.json();
+    console.log(res);
+    console.log(e);
     process.exit(1);
   }
 

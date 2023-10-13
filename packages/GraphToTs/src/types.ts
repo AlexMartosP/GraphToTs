@@ -1,4 +1,4 @@
-type NameKind = {
+export type NameKind = {
   name: string;
   kind: string;
 };

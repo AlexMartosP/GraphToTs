@@ -10,17 +10,15 @@ import generateObjects from "./generateObjects";
 import generateQuery from "./generateQuery";
 import generateInputObjects from "./generateInputObjects";
 
-function generateSchemaTree(types: IntrospectionTypeArray): SchemaTree {
+function generateSchemaTree(
+  types: IntrospectionTypeArray,
+  queryName: string
+): SchemaTree {
   // Get types from introspection
   const scalarTypes = getScalarsFromSchema(types);
-  const objectTypes = getObjectsFromSchema(types);
-  const queryType = getQueryFromSchema(types);
+  const objectTypes = getObjectsFromSchema(types, queryName);
+  const queryType = getQueryFromSchema(types, queryName);
   const inputObjectsTypes = getInputObjectsFromSchema(types);
-
-  if (!queryType) {
-    console.log("No Query type found!");
-    throw new Error();
-  }
 
   // Generate sub-trees of types
   const scalars = generateScalars(scalarTypes);
