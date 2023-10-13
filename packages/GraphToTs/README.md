@@ -3,7 +3,7 @@ Convert your schema to TypeScript types which you can use to make fully type-saf
 You will know what the server expects and what you will get from the server, without re-generating (unless you change the schema).
 
 
-> [!INFO]
+> [!NOTE]
 > I do not recommend using this for other than exploring, this is not fully tested yet!
 
 ### Not supported
@@ -12,7 +12,7 @@ You will know what the server expects and what you will get from the server, wit
 - Alias
 - Local schemas
 
-## Feature ideas (beyond the list above)
+### Feature ideas (beyond the list above)
 - Cached queries
 - Config with more options:
   - Local schema with a remote server
