@@ -16,6 +16,10 @@
   ],
   "author": "Alexander Martos Paschoal",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexMartosP/GraphToTs"
+  },
   "devDependencies": {
     "@types/node": "^20.8.3",
     "nodemon": "^3.0.1",
